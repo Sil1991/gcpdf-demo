@@ -152,7 +152,7 @@ public class MergeTwoFiles {
    *
    * <p>Inherits standard configuration options.
    */
-  public interface WordCountOptions extends PipelineOptions {
+  public interface MergeTwoFilesOptions extends PipelineOptions {
 
     /**
      * By default, this example reads from a public dataset containing the text of
@@ -173,8 +173,8 @@ public class MergeTwoFiles {
   }
 
   public static void main(String[] args) {
-    WordCountOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
-      .as(WordCountOptions.class);
+    MergeTwoFilesOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
+      .as(MergeTwoFilesOptions.class);
     Pipeline p = Pipeline.create(options);
 
     // Concepts #2 and #3: Our pipeline applies the composite CountWords transform, and passes the

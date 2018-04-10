@@ -90,7 +90,7 @@ public class WordCount {
   static class ExtractWordsFn extends DoFn<String, String> {
     private final Counter emptyLines = Metrics.counter(ExtractWordsFn.class, "emptyLines");
     private final Distribution lineLenDist = Metrics.distribution(
-            ExtractWordsFn.class, "lineLenDistro");
+        ExtractWordsFn.class, "lineLenDistro");
 
     @ProcessElement
     public void processElement(ProcessContext c) {
@@ -128,13 +128,13 @@ public class WordCount {
    * modular testing, and an improved monitoring experience.
    */
   public static class CountWords extends PTransform<PCollection<String>,
-          PCollection<KV<String, Long>>> {
+      PCollection<KV<String, Long>>> {
     @Override
     public PCollection<KV<String, Long>> expand(PCollection<String> lines) {
 
       // Convert lines of text into individual words.
       PCollection<String> words = lines.apply(
-              ParDo.of(new ExtractWordsFn()));
+          ParDo.of(new ExtractWordsFn()));
 
       // Count the number of times each word occurs.
       PCollection<KV<String, Long>> wordCounts = words.apply(Count.perElement());
@@ -173,7 +173,6 @@ public class WordCount {
   }
 
   public static void main(String[] args) {
-    PipelineOptionsFactory.register(WordCountOptions.class);
     WordCountOptions options = PipelineOptionsFactory.fromArgs(args).withValidation()
             .as(WordCountOptions.class);
     Pipeline p = Pipeline.create(options);
