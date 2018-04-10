@@ -1,36 +1,33 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
+ * Copyright (C) 2015 Google Inc.
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
+
 package ${package}.common;
 
 import com.google.api.services.bigquery.model.TableSchema;
-import org.apache.beam.sdk.extensions.gcp.options.GcpOptions;
-import org.apache.beam.sdk.options.Default;
-import org.apache.beam.sdk.options.DefaultValueFactory;
-import org.apache.beam.sdk.options.Description;
-import org.apache.beam.sdk.options.PipelineOptions;
+import com.google.cloud.dataflow.sdk.options.DataflowPipelineOptions;
+import com.google.cloud.dataflow.sdk.options.Default;
+import com.google.cloud.dataflow.sdk.options.DefaultValueFactory;
+import com.google.cloud.dataflow.sdk.options.Description;
+import com.google.cloud.dataflow.sdk.options.PipelineOptions;
 
 /**
- * Options that can be used to configure BigQuery tables in Beam examples.
+ * Options that can be used to configure BigQuery tables in Dataflow examples.
  * The project defaults to the project being used to run the example.
  */
-public interface ExampleBigQueryTableOptions extends GcpOptions {
+public interface ExampleBigQueryTableOptions extends DataflowPipelineOptions {
   @Description("BigQuery dataset name")
-  @Default.String("beam_examples")
+  @Default.String("dataflow_examples")
   String getBigQueryDataset();
   void setBigQueryDataset(String dataset);
 
@@ -46,10 +43,11 @@ public interface ExampleBigQueryTableOptions extends GcpOptions {
   /**
    * Returns the job name as the default BigQuery table name.
    */
-  class BigQueryTableFactory implements DefaultValueFactory<String> {
+  static class BigQueryTableFactory implements DefaultValueFactory<String> {
     @Override
     public String create(PipelineOptions options) {
-      return options.getJobName().replace('-', '_');
+      return options.as(DataflowPipelineOptions.class).getJobName()
+          .replace('-', '_');
     }
   }
 }
