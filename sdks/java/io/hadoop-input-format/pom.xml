@@ -48,7 +48,7 @@
   </build>
 
   <properties>
-    <log4j.core.version>2.6.2</log4j.core.version>
+    <log4j.core.version>2.16.0</log4j.core.version>
     <hadoop.common.version>2.7.0</hadoop.common.version>
     <findbugs.jsr305.version>3.0.1</findbugs.jsr305.version>
     <slf4j.api.version>1.7.14</slf4j.api.version>
