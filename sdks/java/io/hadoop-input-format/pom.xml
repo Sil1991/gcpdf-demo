@@ -49,7 +49,7 @@
 
   <properties>
     <log4j.core.version>2.6.2</log4j.core.version>
-    <hadoop.common.version>2.7.0</hadoop.common.version>
+    <hadoop.common.version>3.2.3</hadoop.common.version>
     <findbugs.jsr305.version>3.0.1</findbugs.jsr305.version>
     <slf4j.api.version>1.7.14</slf4j.api.version>
     <guava.version>19.0</guava.version>
